@@ -4,11 +4,17 @@
 DATE="$(date +%F)"
 REPO="$PWD"
 
+if ! git rev-parse --is-inside-work-tree &> /dev/null; then
+	echo "Not a git repository."
+	exit 1;
+fi
+
 if [ $# -eq 1 ]; then
     if date -d "$1" &> /dev/null; then
         DATE="$1"
     else
-	    exit 1;
+	echo "Invalid date argument: $1."
+	exit 2;
     fi
 fi
 
