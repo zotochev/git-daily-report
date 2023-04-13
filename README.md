@@ -1,11 +1,20 @@
 # git-day-report
+Bash script for creating report out of commit messages from current git repository for current user.
 
-# Installation
+## Report format
+```
+<repository-name>:<branch>:
+<commit message 1>
+<commit message 2>
+<commit message 3>
+```
+
+## Installation
 ```bash
 ./install.sh
 ```
 
-# Usage
+## Usage
 Go to directory with git repository.
 ```bash
 cd <directory-with-git-repository>
