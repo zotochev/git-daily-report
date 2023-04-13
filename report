@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+
+DATE="$(date +%F)"
+REPO="$PWD"
+
+if [ $# -eq 1 ]; then
+    if date -d "$1" &> /dev/null; then
+        DATE="$1"
+    else
+	    exit 1;
+    fi
+fi
+
+DIR="$REPO"
+TMP="/tmp/git-report.tmp"
+REPO_NAME="$(git -C "$DIR" config --get remote.origin.url | awk '{split($0,a,"/"); print a[2]}')"
+REPO_FIX=${REPO_NAME%.git}
+REPO_NAME="${REPO_FIX##*/}"
+
+git -C "$DIR" log --all --author "$(git config --get user.name)" --since="$DATE 00:00" --until="$DATE 23:59" --pretty=format:"%s" > "$TMP"
+
+echo "$REPO_NAME:$(git -C "$DIR" rev-parse --abbrev-ref HEAD):"
+cat "$TMP"
+echo ""
+rm "$TMP"
+
