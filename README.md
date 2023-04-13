@@ -23,9 +23,10 @@ Run command
 ```bash
 report
 ```
-Also supported
+Also as a first argument supported any [date-like-argument](https://www.gnu.org/software/coreutils/manual/html_node/Examples-of-date.html)
 ```bash
 report yesterday
 report today
 report 2023-04-07
 ```
+
